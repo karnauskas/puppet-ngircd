@@ -1,0 +1,35 @@
+{
+  "name": "nkts-ngircd",
+  "version": "0.1.1",
+  "source": "https://github.com/nkts/puppet-ngircd.git",
+  "author": "nkts",
+  "license": "Apache License, Version 2.0",
+  "summary": "ngircd module",
+  "description": "ngIRCd is a free, portable and lightweight Internet Relay Chat server for small or private networks.",
+  "project_page": "https://github.com/nkts/puppet-ngircd",
+  "dependencies": [
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.0.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Gemfile": "07f79cc081638bf4eeedd87ae6856544",
+    "Gemfile.lock": "25dfdb06f2a45a5f1f6aae08bf1260f0",
+    "Modulefile": "3afef3f36a493e9743a871faddcf87f2",
+    "manifests/channel.pp": "50fbdf6d221e1c48b929bd9ee78e5d62",
+    "manifests/init.pp": "6a746d44a9a0f2f3359628445f2cbcc2",
+    "manifests/oper.pp": "5ccd9e7a5d7f8e830b74495832bb1a23",
+    "manifests/param.pp": "96ccfb0a57761d53294b879918701d7b",
+    "manifests/server.pp": "c40c371b86adb0d53d93c4c7807919fb",
+    "manifests/ssl.pp": "0bbea0df3b882c150c73d1bf06691630",
+    "templates/channel.erb": "68fa33d13f3fef78c2561b524166ce91",
+    "templates/global.erb": "16f962302fc5ef308953d5114f5fe634",
+    "templates/oper.erb": "f6c1ce2e713704dc565e3aa031f75fb9",
+    "templates/server.erb": "114e8f1659db6f5b8ba259989561a254",
+    "templates/ssl.erb": "84f99e9eefc39091ef777b688e2a3da2"
+  }
+}
