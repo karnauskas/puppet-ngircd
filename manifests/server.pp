@@ -12,7 +12,7 @@ define ngircd::server(
   $ssl = 'no',
 ) {
 
-  #include 'ngircd::params'
+  include 'ngircd'
 
   concat::fragment { "server_${name}":
     target  => $ngircd::params::config_file,

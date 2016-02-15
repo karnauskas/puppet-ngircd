@@ -7,13 +7,13 @@
   Info = <%= @info %>
   Listen = <%= @bind.join(',') %>
   MotdPhrase = <%= @motd %>
+  Network = <%= @network %>
   Password = <%= @password %>
   PidFile = <%= @pid_file %>
   Ports = <%= @ports.join(',') %>
   HelpFile =
   ServerUID = <%= @user %>
   ServerGID = <%= @group %>
-  Network = <%= @network %>
 
 [Limits]
   ConnectRetry = 60
@@ -42,12 +42,16 @@
   IncludeDir = <%= @conf_d %>
   MorePrivacy = <%= @more_privacy %>
   NoticeAuth = <%= @notice_auth %>
+  NoticeBeforeRegistration = <%= @notice_before_auth %>
   OperCanUseMode = no
   OperChanPAutoOp = yes
   OperServerMode = no
+  PAM =
+  PAMIsOptional =
   RequireAuthPing = no
   ScrubCTCP = no
   SyslogFacility = local5
+  WebircPassword =
 
 <%if @ssl -%>
 [SSL]

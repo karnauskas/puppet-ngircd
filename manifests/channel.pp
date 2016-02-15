@@ -8,6 +8,8 @@ define ngircd::channel(
   $max = 0,
 ) {
 
+  include 'ngircd'
+  
   concat::fragment { "chan_${name}":
     target  => $ngircd::params::config_file,
     content => template("${module_name}/channel.erb"),

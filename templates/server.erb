@@ -1,21 +1,12 @@
+# Server <%= @name %>:<%= @port %>
 [Server]
   Name = <%= @name %>
-<% if @passive == 'no' -%>
   Host = <%= @host %>
   Port = <%= @port %>
   Bind = <%= @bind %>
-<% end -%>
   MyPassword = <%= @local_password %>
   PeerPassword = <%= @remote_password %>
   Group = <%= @group %>
   Passive = <%= @passive %>
   SSLConnect = <%= @ssl %>
   ServiceMask = <%= @service_mask %>
-
-[SSL]
-  CertFile = <%= @certfiel %>
-  CipherList = <%= @ciphers.join(' ') %>
-  DHFile = <%= @dhfile %>
-  KeyFile = <%= @keyfile %>
-  KeyFilePassword = <%= @keyfilepassword %>
-  Ports = <%= @ports.join(',')

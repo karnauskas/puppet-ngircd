@@ -5,7 +5,7 @@ define ngircd::operator(
   $mask = '*!*@*',
 ) {
 
-  #include 'ngircd::params'
+  include 'ngircd'
 
   concat::fragment { "oper_${name}":
     target  => $ngircd::params::config_file,
