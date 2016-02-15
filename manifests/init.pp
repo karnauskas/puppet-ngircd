@@ -67,10 +67,10 @@ class ngircd(
   } ~>
 
   file { $conf_d:
+    ensure => directory,
     owner  => 0,
     group  => $group,
-    ensure => directory,
-    mode   => 0755,
+    mode   => '0755',
   }
 
   $ipv4_str = bool2str($ipv4, 'yes', 'no')
