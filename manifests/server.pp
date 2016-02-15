@@ -12,8 +12,10 @@ define ngircd::server(
   $ssl = 'no',
 ) {
 
+  #include 'ngircd::params'
+
   concat::fragment { "server_${name}":
-    target  => $::ngircd::param::config_file,
+    target  => $ngircd::params::config_file,
     content => template("${module_name}/server.erb"),
     order   => '05',
   }

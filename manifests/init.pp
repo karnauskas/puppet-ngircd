@@ -27,52 +27,76 @@
 #
 # === Authors
 #
-# Marius Karnauskas <marius@karnauskas.lt>
+# Marius Karnauskas <marius.karnauskas@gmail.com>
 #
 # === Copyright
 #
 # Copyright 2014 Marius Karnauskas
 #
 class ngircd(
-  $server_name = $::fqdn,
-  $ports = [ 6667 ],
-  $info = '',
-  $motd = '',
-  $ipv6 = 'yes',
-  $ipv4 = 'yes',
-  $allowed_channel_types = '#',
-  $dns = 'yes',
-  $help_file = '/usr/share/doc/ngircd-21/Commands.txt',
-  $ident = 'yes',
-) {
+  $server_name = $::ngircd::params::server_name,
+  $ports = $::ngircd::params::ports,
+  $bind = $::ngircd::params::bind,
+  $admin1 = $::ngircd::params::admin1,
+  $admin2 = $::ngircd::params::admin2,
+  $admin = $::ngircd::params::admin,
+  $motd = $::ngircd::params::motd,
+  $info = $::ngircd::params::info,
+  $ipv6 = $::ngircd::params::ipv6,
+  $ipv4 = $::ngircd::params::ipv4,
+  $allowed_channel_types = $::ngircd::params::allowed_channel_types,
+  $dns = $::ngircd::params::dns,
+  $network = $::ngircd::params::network,
+  $ident = $::ngircd::params::ident,
+  $ssl = $::ngircd::params::ssl,
+  $ssl_ports = $::ngircd::params::ssl_ports,
+  $certfile = $::ngircd::params::certfile,
+  $keyfile = $::ngircd::params::keyfile,
+  $keyfilepassword = $::ngircd::params::keyfilepassword,
+  $ciphers = $::ngircd::params::ciphers,
+  $dhfile = $::ngircd::params::dhfile,
+  $user = $::ngircd::params::user,
+  $group = $::ngircd::params::group,
+  $package_name = $::ngircd::params::package_name,
+  $package_version = $::ngircd::params::package_version,
+  $conf_d = $::ngircd::params::conf_d,
+) inherits ::ngircd::params {
 
-  include 'ngircd::param'
+  package { $package_name:
+    ensure => $package_version,
+  } ~>
 
-  package { $::ngircd::param::package_name:
-    ensure => latest,
+  file { $conf_d:
+    owner  => 0,
+    group  => $group,
+    ensure => directory,
+    mode   => 0755,
   }
 
-  concat { $::ngircd::param::config_file:
-    owner   => 'root',
-    group   => $::ngircd::param::group,
+  $ipv4_str = bool2str($ipv4, 'yes', 'no')
+  $ipv6_str = bool2str($ipv6, 'yes', 'no')
+
+  concat { $ngircd::params::config_file:
+    owner   => 0,
+    group   => $group,
     mode    => '0660',
     warn    => true,
-    require => Package[$::ngircd::param::package_name],
+    require => Package[$package_name],
   }
 
   concat::fragment { 'main':
-    target  => $::ngircd::param::config_file,
+    target  => $ngircd::params::config_file,
     order   => '01',
     content => template("${module_name}/global.erb"),
   }
 
-  service { $::ngircd::param::service_name:
+  service { $ngircd::params::service_name:
     ensure    => running,
     enable    => true,
     require   => [
-      File[$::ngircd::param::config_file]
+      Concat[$ngircd::params::config_file]
     ],
-    subscribe => File[$::ngircd::param::config_file],
+    subscribe => Concat[$ngircd::params::config_file]
   }
 
 }

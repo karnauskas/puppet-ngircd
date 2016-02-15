@@ -12,3 +12,10 @@
   SSLConnect = <%= @ssl %>
   ServiceMask = <%= @service_mask %>
 
+[SSL]
+  CertFile = <%= @certfiel %>
+  CipherList = <%= @ciphers.join(' ') %>
+  DHFile = <%= @dhfile %>
+  KeyFile = <%= @keyfile %>
+  KeyFilePassword = <%= @keyfilepassword %>
+  Ports = <%= @ports.join(',')

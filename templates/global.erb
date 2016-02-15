@@ -1,19 +1,19 @@
+
 [Global]
   Name = <%= @server_name %>.
-  AdminInfo1 = <%= @admin_info1 %>
-  AdminInfo2 = <%= @admin_info2 %>
-  AdminEMail = <%= @admin_email %>
-  HelpFile = <%= @help_file %>
+  AdminInfo1 = <%= @admin1 %>
+  AdminInfo2 = <%= @admin2 %>
+  AdminEMail = <%= @admin %>
   Info = <%= @info %>
-  ;Listen = 127.0.0.1
-  ;MotdFile = 
+  Listen = <%= @bind.join(',') %>
   MotdPhrase = <%= @motd %>
   Password = <%= @password %>
-  PidFile = /var/run/ngircd/ngircd.pid
+  PidFile = <%= @pid_file %>
   Ports = <%= @ports.join(',') %>
-  ServerGID = ngircd
-  ServerUID = ngircd
-  Network = abba
+  HelpFile =
+  ServerUID = <%= @user %>
+  ServerGID = <%= @group %>
+  Network = <%= @network %>
 
 [Limits]
   ConnectRetry = 60
@@ -34,12 +34,12 @@
   CloakHostModeX = <%= @cloak_host_modex %>
   CloakHostSalt = <%= @cloak_host_salt %>
   CloakUserToNick = <%= @cloak_user_to_nick %>
-  ConnectIPv4 = <%= @ipv4 %>
-  ConnectIPv6 = <%= @ipv6 %>
+  ConnectIPv4 = <%= @ipv4_str %>
+  ConnectIPv6 = <%= @ipv6_str %>
   DefaultUserModes = <%= @user_modes %>
   DNS = <%= @dns %>
-  Ident = <%= @ident %>
-  IncludeDir = /etc/ngircd.conf.d
+  ;Ident = <%= @ident %>
+  IncludeDir = <%= @conf_d %>
   MorePrivacy = <%= @more_privacy %>
   NoticeAuth = <%= @notice_auth %>
   OperCanUseMode = no
@@ -48,5 +48,13 @@
   RequireAuthPing = no
   ScrubCTCP = no
   SyslogFacility = local5
-  ;WebircPassword =
 
+<%if @ssl -%>
+[SSL]
+  CertFile = <%= @certfile %>
+  CipherList = <%= @ciphers %>
+  DHFile = <%= @dhfile %>
+  KeyFile = <%= @keyfile %>
+  KeyFilePassword = <%= @keyfilepassword %>
+  Ports = <%= @ssl_ports.join(',') %>
+<% end -%>

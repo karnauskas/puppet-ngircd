@@ -1,12 +1,14 @@
 # Add server operator.
 
-define ngircd::oper(
-  $password = undef,
+define ngircd::operator(
+  $password,
   $mask = '*!*@*',
 ) {
 
+  #include 'ngircd::params'
+
   concat::fragment { "oper_${name}":
-    target  => $::ngircd::param::config_file,
+    target  => $ngircd::params::config_file,
     content => template("${module_name}/oper.erb"),
     order   => '06',
   }
